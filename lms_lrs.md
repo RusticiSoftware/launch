@@ -1,4 +1,4 @@
-Incorporating a TinCan LRS into an LMS
+##Incorporating a TinCan LRS into an LMS
 
 If you are not familiar with Project Tin Can, the TinCan API, and the term LRS, please
 refer first to the Tin Can API specification.
@@ -13,7 +13,7 @@ In particular, content packaging, launch, and import should be defined for an LM
 not for an LRS -- it just stores and retrieves learning records, not content.
 
 
-Packaging
+###Packaging
 
 Content, activity definitions, and activity provider definitions may be packaged for
 TinCan. The primary object being packaged is always activity definitions. It is valid to
@@ -21,7 +21,8 @@ create a package that contains only activity definitions, however content and ac
 provider definitions may only be packaged with an associated activity definition.
 
 A TinCan package must always include a TinCan metadata file, this is a file named
-“tincan.xml”, conforming to the TinCan schema. If not including content, this file
+“tincan.xml”, conforming to the <a href="http://projecttincan.com/tincan.xsd">TinCan</a>
+schema. If not including content, this file
 itself may be used as the TinCan package. If content is to be included, then this file
 must be placed into a zip file with the content.
 
@@ -35,7 +36,7 @@ If HTML files are included in the content package, they may link to each other, 
 resources within the package, using relative paths based on the package structure. They
 may also link to external resources using absolute paths.
 
-Activity Definition
+###Activity Definition
 
 The activity definition section of tincan.xml maps to the activity definition defined in
 the TCAPI document, with the exception of “launch” and “resource”. 
@@ -47,18 +48,18 @@ Resource is an absolute or relative path to something that a person can either r
 download which will enable them to experience this activity, for example: an application
 to run, a video to view, or directions to a physical location for an event.
 
-Only one activity definition within a package may contain launch or resource elements.
+__Only one activity definition within a package may contain launch or resource elements.__
 This limitation should be lifted in future TinCan versions but the implementation
 consequences of multiple launchable activities per package need more thought first.
 
-NOTE: Activities do not have a hierarchy, and are declared as a flat list. Any
+__NOTE:__ Activities do not have a hierarchy, and are declared as a flat list. Any
 hierarchical context must be reported by the activity provider, using the “context”
 portion of each statement. (if that context is to be preserved). If emulating a
 traditional SCORM package using TinCan, consider adding a “grouping” activity to each
 statement, which corresponds to your “root of the activity tree”, and also a “parent”
 activity.
 
-Activity Provider Definition, activity groups.
+###Activity Provider Definition, activity groups.
 
 The tincan.xml file includes one or more groups of activities. The reason for breaking
 up activities into groups is to enable defining different authorized activity providers
@@ -82,7 +83,7 @@ reporting systems, but will not be (or may not be) sent by the activity provider
 reporting statements. That is, TinCan.xml may be used to describe activities to the LRS,
 as an alternative to doing that description at runtime.
 
-Import
+###Import
 
 When importing a TinCan package, all the content, activity definitions, and activity
 provider definitions in the package will be imported.
@@ -94,14 +95,15 @@ defined, the LMS will store those values as activity profile entries in its asso
 LRS. Any relative URLs will be transformed into absolute URLs based on the location the
 LRS stored the content.
 
-Language / Internationalization
+### Language / Internationalization
 
 Many of the entries in the TinCan schema have an xml:lang attribute. Where the language
 of the associated entry is known, it should be declared. Where an entry is available in
 multiple languages, it should be repeated for each language. If the language is unknown,
 then the attribute should be left blank.
 
-Launch
+<a name="launch" />
+### Launch
 
 Tin Can APs do not need to be launched from an LMS, however it is still an option. When
 an LMS launches a Tin Can AP, it will provide the necessary information for that AP to
@@ -109,23 +111,23 @@ track back to the LRS (endpoint, learner information, credentials, and optionall
 registration, activity ID, platform,language, and grouping). The format of the launch
 URL will be as follows:
 
-<AP URL>/?endpoint=<lrs
-endpoint>&auth=<token>&actor=<learner>[&registration=<registration>][&activity_id=<
-activity ID>[&activity_platform=<platform>][&Accept-Language=<accept
-language>][&grouping=<grouping activity ID>]
-
+```
+<AP URL>/?endpoint=<lrsendpoint>&auth=<token>&actor=<learner>[&registration=<registration>][&activity_id=<activity ID>[&activity_platform=<platform>][&Accept-Language=<acceptlanguage>][&grouping=<grouping activity ID>]
+```
 
 Note that that some of the parameter values include reserved characters, and even other
 URLS, and therefore must be URL encoded.
 
 Example launch link (shown without URL encoding and with line breaks for readability):
 
-http://example.scorm.com/TCActivityProvider/
-?endpoint=http://example.scorm.com/lrs/
-&auth=OjFjMGY4NTYxNzUwOGI4YWY0NjFkNzU5MWUxMzE1ZGQ1
-&actor={ "name" : ["Project Tin Can"], "mbox" : ["mailto:tincan@scorm.com"] }
-&registration=760e3480-ba55-4991-94b0-01820dbd23a2
-&activity_id=http://example.scorm.com/tincan/example/simplestatement
+```
+http://example.scorm.com/TCActivityProvider/   
+?endpoint=http://example.scorm.com/lrs/   
+&auth=OjFjMGY4NTYxNzUwOGI4YWY0NjFkNzU5MWUxMzE1ZGQ1   
+&actor={ "name" : ["Project Tin Can"], "mbox" : ["mailto:tincan@scorm.com"] }   
+&registration=760e3480-ba55-4991-94b0-01820dbd23a2   
+&activity_id=http://example.scorm.com/tincan/example/simplestatement   
+```
 
 Partial launch information may also be provided by an LMS in the form of a launch link,
 which may consist of only endpoint information, or may include learner information but
@@ -134,7 +136,8 @@ for the necessary information.
 
 The LMS should specify Accept-Language, if it knows the learner’s language preferences.
 Except for its location in the query string instead of the header, Accept-Language
-should be constructed and interpreted according to RFC 2616 (HTTP 1.1).
+should be constructed and interpreted according to
+<a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html">RFC 2616</a> (HTTP 1.1).
 
 The LMS should specify a grouping activity if the activity being launched is considered,
 by the LMS, to be part of a larger group of activities for reporting purposes. The
@@ -156,16 +159,17 @@ LRS endpoint it should track to. The AP may also be configured with credentials 
 LRS, in which case credentials need not be obtained for each learner.
 
 If launch refers to an activity with associated protected content, the launch link will
-include additional parameters to support access to that protected content.
+include additional parameters to support access to that protected content. (see
+<a href="#privateContent">Private Content Access and Tin Can</a>
 
-OAuth
+###OAuth
 
 If the activity being launched has an associated registered OAuth application with the
 LMS, the LMS should not include an “auth” parameter in the launch link. The Activity
 Provider / OAuth application is expected to authenticate using OAuth, which may involve
 asking the learner to re-authenticate.
 
-Other Scenarios
+###Other Scenarios
 
 The process of getting launch information from an LMS to an AP in a manner other than a
 launch link (URL) is not defined. Although it is a goal of the TCAPI to support out of
@@ -176,9 +180,10 @@ the activity. Minimally, the AP must be configured with the LRS endpoint, and us
 will also need authentication credentials.
 
 
-Private Content Access and Tin Can
+<a name="privateContent"/>
+###Private Content Access and Tin Can
 
-This document describes a companion specification to the Tin Can API for the purpose of
+This section describes a companion specification to the Tin Can API for the purpose of
 gaining access to content that is stored on an LMS, but which requires authentication to
 retrieve. This is needed since even though Tin Can allows tracking of experiences for
 which the content is not stored on an LMS, or for which there is no traditional content,
@@ -191,13 +196,13 @@ for a complex permissions scheme, this access method will apply only to content 
 been uploaded in a Tin Can package, and only where the accessor of that content has been
 launched using a Tin Can launch link.
 
-In addition to the launch link parameters described in: “Incorporating a TinCan (0.9)
-LRS into an LMS”, the following parameters will be provided as needed:
+In addition to the launch link parameters described in the <a href="#launch">launch
+section</a>, the following parameters will be provided as needed:
 
-content_token: The authorization token to be included on requests to the content
+* __content_token:__ The authorization token to be included on requests to the content
 endpoint. If missing, the content is not protected and must be accessed directly.
 
-content_endpoint: the absolute URL to use to access protected content. If content token
+* __content_endpoint:__ the absolute URL to use to access protected content. If content token
 is specified, but the endpoint is not, the TCAPI endpoint, with the postfix “content/”
 is to be used as the content endpoint.
 
