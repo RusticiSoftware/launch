@@ -1,7 +1,7 @@
 ##Incorporating a TinCan LRS into an LMS
 
 If you are not familiar with Project Tin Can, the TinCan API, and the term LRS, please
-refer first to the Tin Can API specification.
+refer first to the [Tin Can API specification](http://www.adlnet.gov/wp-content/uploads/2013/05/20130521_xAPI_v1.0.0-FINAL-correx.pdf).
 
 Since an LRS is meant to be a component with limited but well defined capabilities, we
 expect that in many cases it will be desirable to integrate an LRS into an LMS, and that
@@ -66,13 +66,13 @@ up activities into groups is to enable defining different authorized activity pr
 for each group. Each group of activities has a “provider” section, which MAY be used to
 declare to the LMS/LRS what applications (activity providers) should be allowed to
 report statements about each group of activities. The elements in this section reflect
-the information that must be registered duiring the OAuth application registration
+the information that must be registered during the OAuth application registration
 process, and provide a way to get this information into an LMS without the administrator
 having to go through a registration UI.
 
-The schema for TinCan.xml is: http://projecttincan.com/tincan.xsd
+The schema for tincan.xml is: http://projecttincan.com/tincan.xsd
 
-TinCan.xml doesn't have to have all activity IDs that will be used in it, what it should
+tincan.xml doesn't have to have all activity IDs that will be used in it, what it should
 have is:
 
 1) The activity ID that is considered the root activity for this package, along with a
@@ -80,7 +80,7 @@ launch link, so the LMS knows what to launch.
 
 2) Any activity details (such as activity descriptions) that should be available to
 reporting systems, but will not be (or may not be) sent by the activity provider when
-reporting statements. That is, TinCan.xml may be used to describe activities to the LRS,
+reporting statements. That is, tincan.xml may be used to describe activities to the LRS,
 as an alternative to doing that description at runtime.
 
 ###Import
@@ -105,7 +105,7 @@ then the attribute should be left blank.
 <a name="launch" />
 ### Launch
 
-Tin Can APs do not need to be launched from an LMS, however it is still an option. When
+TinCan APs(?) do not need to be launched from an LMS, however it is still an option. When
 an LMS launches a Tin Can AP, it will provide the necessary information for that AP to
 track back to the LRS (endpoint, learner information, credentials, and optionally
 registration, activity ID, platform,language, and grouping). The format of the launch
