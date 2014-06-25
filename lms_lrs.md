@@ -115,7 +115,7 @@ URL will be as follows:
 <AP URL>/?endpoint=<lrsendpoint>&auth=<token>&actor=<learner>[&registration=<registration>][&activity_id=<activity ID>[&activity_platform=<platform>][&Accept-Language=<acceptlanguage>][&grouping=<grouping activity ID>]
 ```
 
-Note that that some of the parameter values include reserved characters, and even other
+Note that some of the parameter values include reserved characters, and even other
 URLS, and therefore must be URL encoded.
 
 Example launch link (shown without URL encoding and with line breaks for readability):
@@ -172,7 +172,7 @@ asking the learner to re-authenticate.
 ###Other Scenarios
 
 The process of getting launch information from an LMS to an AP in a manner other than a
-launch link (URL) is not defined. Although it is a goal of the TCAPI to support out of
+launch link (URL) is not defined. Although it is a goal of the Tin Can API to support out of
 browser scenarios, this is supported by allowing the AP to pass information to a LRS
 about learners and activities that have not been previously defined in the LRS. That is,
 out of browser scenarios are supported by removing the requirement for the LRS to launch
@@ -181,20 +181,20 @@ will also need authentication credentials.
 
 
 <a name="privateContent"/>
-###Private Content Access and Tin Can
+###Private Content Access and TinCan
 
 This section describes a companion specification to the Tin Can API for the purpose of
 gaining access to content that is stored on an LMS, but which requires authentication to
-retrieve. This is needed since even though Tin Can allows tracking of experiences for
+retrieve. This is needed since even though TinCan allows tracking of experiences for
 which the content is not stored on an LMS, or for which there is no traditional content,
 the LMS is still a convenient place to store the content associated with a learning
-experience. Since Tin Can does not require an active browser session, the content may no
+experience. Since TinCan does not require an active browser session, the content may no
 longer be retrieved by relying on that session.
 
 Since the problem is accessing content which is stored on an LMS, and to avoid the need
 for a complex permissions scheme, this access method will apply only to content that has
-been uploaded in a Tin Can package, and only where the accessor of that content has been
-launched using a Tin Can launch link.
+been uploaded in a TinCan package, and only where the accessor of that content has been
+launched using a TinCan launch link.
 
 In addition to the launch link parameters described in the <a href="#launch">launch
 section</a>, the following parameters will be provided as needed:
@@ -210,7 +210,7 @@ When a client application needs to access a protected resource, it will first de
 the path to the protected resource based on the content endpoint, and the relative path
 of the protected resource within the Tin Can package.
 
-For example, in the Golf Example Tin Can package, there is a resource
+For example, in the Golf Example TinCan package, there is a resource
 ‘Etiquette/distracting.jpg’. If the content endpoint is:
 https://example.com/TCAPI/content/, then the following path would be built to access
 this protected resource, and the specified content_token is added to that URL. It should
@@ -232,7 +232,7 @@ https://example.com/TCAPI/content/?content_token=b50607fb-956e-429f-b89e-388c43d
 
 The server will not enforce any authentication scheme on the content endpoint, except
 validation of the content token. The content token will serve both the validate the
-request, and look up what Tin Can package the request is associated with. The content
+request, and look up what TinCan package the request is associated with. The content
 token will remain valid as long as the ‘auth’ parameter sent in the launch link remains
 valid.
 
@@ -241,15 +241,15 @@ is recommended that the server issue a 301 redirect to the URL on the LMS where 
 content may be accessed, and include on the URL a signature that the LMS will recognize
 to allow access to the content.
 
-If the above behavior is not practical, the server must instead handle GET, HEAD, and
+If the above behavior is not practical, the server must instead handle GET, HEAD (should this be READ?), and
 OPTIONS requests according to the HTTP 1.1 specification, as if the server was hosting
 the content at the specified URL.  Note that this includes properly supporting headers
 such as ETag, Range, if-*, etc.
 
 The behavior described above is intended to allow clients to access individual protected
-resources without implementing any Tin Can behavior. For example, this is important in
+resources without implementing any TinCan behavior. For example, this is important in
 order to enable handing off a URL to a video player, that player needs only support
 HTTP, it does not need to have any Tin Can specific logic. It will be still be necessary
-for the Tin Can client application to generate the correct URL for each protected
+for the TinCan client application to generate the correct URL for each protected
 resource. So a resource which when loaded then refers to other resources (such as a web
 page), must be loaded by a client with additional logic to fix those links.
