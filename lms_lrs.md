@@ -123,7 +123,7 @@ Example launch link (shown without URL encoding and with line breaks for readabi
 ```
 http://example.scorm.com/TCActivityProvider/   
 ?endpoint=http://example.scorm.com/lrs/   
-&auth=OjFjMGY4NTYxNzUwOGI4YWY0NjFkNzU5MWUxMzE1ZGQ1   
+&auth=Basic a2V5OnNlY3JldA==   
 &actor={ "name" : ["Project Tin Can"], "mbox" : ["mailto:tincan@scorm.com"] }   
 &registration=760e3480-ba55-4991-94b0-01820dbd23a2   
 &activity_id=http://example.scorm.com/tincan/example/simplestatement   
