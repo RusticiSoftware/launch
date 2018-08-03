@@ -103,6 +103,7 @@ multiple languages, it should be repeated for each language. If the language is 
 then the attribute should be left blank.
 
 <a name="launch" />
+
 ### Launch
 
 TinCan APs(?) do not need to be launched from an LMS, however it is still an option. When
