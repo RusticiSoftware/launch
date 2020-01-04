@@ -103,6 +103,7 @@ multiple languages, it should be repeated for each language. If the language is 
 then the attribute should be left blank.
 
 <a name="launch" />
+
 ### Launch
 
 TinCan APs(?) do not need to be launched from an LMS, however it is still an option. When
@@ -159,8 +160,8 @@ LRS endpoint it should track to. The AP may also be configured with credentials 
 LRS, in which case credentials need not be obtained for each learner.
 
 If launch refers to an activity with associated protected content, the launch link will
-include additional parameters to support access to that protected content. (see
-<a href="#privateContent">Private Content Access and Tin Can</a>
+include additional parameters to support access to that protected content (see
+<a href="#privateContent">Private Content Access and Tin Can</a>).
 
 ### OAuth
 
@@ -181,6 +182,7 @@ will also need authentication credentials.
 
 
 <a name="privateContent"/>
+
 ### Private Content Access and TinCan
 
 This section describes a companion specification to the Tin Can API for the purpose of
