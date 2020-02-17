@@ -102,8 +102,8 @@ of the associated entry is known, it should be declared. Where an entry is avail
 multiple languages, it should be repeated for each language. If the language is unknown,
 then the attribute should be left blank.
 
-<a name="launch" />
 ### Launch
+<a name="launch" />
 
 TinCan APs(?) do not need to be launched from an LMS, however it is still an option. When
 an LMS launches a Tin Can AP, it will provide the necessary information for that AP to
